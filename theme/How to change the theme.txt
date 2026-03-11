@@ -1,0 +1,22 @@
+THEME NAME(10):
+---------------------------
+Winter Wonderland
+Halloween Theme
+Botanical/Nature Theme
+Dark Mode Minimalist
+Sunset Gradient
+Retro/Vaporwave
+Candy Pop / Pastel Sweet
+Cyberpunk Theme
+Japanese Zen
+Dreamy Galaxy
+---------------------------
+change in file : backend.php
+---------------------------
+18 line : $current_theme_name = "THEME NAME"; // <--- CHANGE THIS TO SELECT YOUR THEME
+
+
+
+
+example : $current_theme_name = "Winter Wonderland";
+example : $current_theme_name = "Candy Pop / Pastel Sweet";
