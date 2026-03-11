@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>MoonNight · ムーンナイト | アルティメット</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ===== المتغيرات والثيم ===== */
+    :root {
+      --deep-purple: #0d031f;
+      --royal-purple: #6b3aff;
+      --soft-purple: #b48aff;
+      --light-purple: #e2d1ff;
+      --white: #ffffff;
+      --glow-purple: rgba(160, 120, 255, 0.7);
+      --glow-white: rgba(255, 255, 255, 0.8);
+      --bg-gradient: radial-gradient(circle at top right, #2a1755, #0b0420 80%);
+      --card-bg: rgba(20, 8, 40, 0.6);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--deep-purple);
+      font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ===== خلفية ديناميكية متحركة (3D Effect) ===== */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle at 70% 30%, #8f6eff20 0%, transparent 30%),
+        radial-gradient(circle at 30% 70%, #c49eff20 0%, transparent 30%),
+        repeating-linear-gradient(45deg, #3a247050 0px, #3a247050 2px, transparent 2px, transparent 10px);
+      animation: backgroundShift 25s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes backgroundShift {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(1deg) scale(1.05); }
+    }
+
+    /* ===== البطاقة الرئيسية - 3D Ultra ===== */
+    .moon-card {
+      position: relative;
+      z-index: 30;
+      width: 100%;
+      max-width: 650px;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(20px) saturate(200%);
+      border: 2px solid rgba(200, 160, 255, 0.4);
+      border-radius: 60px 60px 60px 60px;
+      box-shadow: 
+        0 50px 80px -20px black,
+        0 0 0 2px rgba(255, 255, 255, 0.2) inset,
+        0 0 60px var(--glow-purple),
+        0 20px 0 #2e1b55;
+      padding: 2.8rem 2rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: cardFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-10px) scale(1.02); }
+    }
+
+    .moon-card:hover {
+      box-shadow: 
+        0 60px 100px -15px black,
+        0 0 0 3px rgba(220, 180, 255, 0.6) inset,
+        0 0 100px #c49eff,
+        0 25px 0 #452d7a;
+    }
+
+    /* ===== زخارف مانغا متطورة ===== */
+    .manga-ornament {
+      position: absolute;
+      top: -15px;
+      left: 10%;
+      width: 200px;
+      height: 40px;
+      background: linear-gradient(90deg, transparent, #ffffff40, #c09eff, #ffffff40, transparent);
+      filter: blur(2px) drop-shadow(0 0 10px #c39eff);
+      transform: rotate(-3deg) skewX(-10deg);
+      border-radius: 40% 20% 60% 20%;
+      opacity: 0.8;
+      z-index: 40;
+      pointer-events: none;
+    }
+
+    .manga-ornament::after {
+      content: "⚡⚡⚡";
+      position: absolute;
+      top: -20px;
+      right: -30px;
+      font-size: 2rem;
+      color: #ffffff40;
+      transform: rotate(15deg);
+    }
+
+    /* ===== عنوان رئيسي سينمائي ===== */
+    .title-section {
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .japanese-title {
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, #fff, #dbb9ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 6px;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 30px #c49eff;
+    }
+
+    h1 {
+      font-size: 5.2rem;
+      font-weight: 900;
+      background: linear-gradient(145deg, #ffffff, #e7d0ff, #dbb5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 
+        0 0 40px #ad70ff,
+        10px 15px 0 #2d174d,
+        -5px -5px 0 #4d2d8a;
+      letter-spacing: 8px;
+      line-height: 1.1;
+      filter: drop-shadow(0 10px 10px #00000080);
+      animation: titleGlitch 3s infinite;
+    }
+
+    @keyframes titleGlitch {
+      0%, 100% { transform: skew(0deg, 0deg); opacity: 1; text-shadow: 10px 15px 0 #2d174d, -5px -5px 0 #4d2d8a, 0 0 40px #ad70ff; }
+      95% { transform: skew(2deg, 1deg); text-shadow: 12px 17px 0 #2d174d, -7px -7px 0 #4d2d8a; }
+      96% { transform: skew(-2deg, -1deg); text-shadow: 8px 12px 0 #2d174d, -3px -3px 0 #4d2d8a; }
+    }
+
+    /* ===== عرض السيرفر - ثلاثي الأبعاد ===== */
+    .server-3d {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      background: linear-gradient(145deg, #1f123b, #14092a);
+      border: 3px solid #b589ff;
+      border-radius: 100px;
+      padding: 1.2rem 2rem;
+      margin: 2.5rem 0 2.2rem;
+      box-shadow: 
+        0 20px 0 #432f6e,
+        0 30px 40px -10px black,
+        0 0 50px #a070ff;
+      transform: perspective(1000px) rotateX(2deg);
+    }
+
+    .server-icon {
+      font-size: 3rem;
+      color: #f0e0ff;
+      filter: drop-shadow(0 0 15px white);
+      animation: pulseIcon 2s ease infinite;
+    }
+
+    @keyframes pulseIcon {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 15px white); }
+      50% { transform: scale(1.1); filter: drop-shadow(0 0 30px #d09eff); }
+    }
+
+    .server-ip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(145deg, #ffffff, #eed5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+    }
+
+    .server-port {
+      font-size: 2rem;
+      background: #3f2770;
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      border: 2px solid #caa9ff;
+      color: white;
+      font-weight: 700;
+      box-shadow: inset 0 -3px 0 #1a0d30, 0 5px 0 #1a0d30;
+    }
+
+    /* ===== أزرار احترافية 3D ===== */
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 2.5rem 0 2rem;
+      justify-content: center;
+    }
+
+    .super-btn {
+      flex: 1 1 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      background: linear-gradient(145deg, #271d42, #1b1133);
+      border: 3px solid #ffffff;
+      border-radius: 40px 10px 40px 10px;
+      padding: 1.6rem 1rem;
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      box-shadow: 
+        0 20px 0 #341f60,
+        0 30px 40px #00000080,
+        0 0 30px #b387ff;
+      transition: 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .super-btn::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, #ffffff30, transparent);
+      transform: rotate(45deg);
+      animation: btnShine 4s infinite;
+    }
+
+    @keyframes btnShine {
+      0% { left: -50%; }
+      20% { left: 150%; }
+      100% { left: 150%; }
+    }
+
+    .super-btn i {
+      font-size: 2.5rem;
+      filter: drop-shadow(0 0 10px white);
+    }
+
+    .super-btn:hover {
+      transform: translateY(-8px);
+      box-shadow: 
+        0 28px 0 #4d2f8f,
+        0 40px 50px black,
+        0 0 70px #e1c4ff;
+    }
+
+    .super-btn:active {
+      transform: translateY(8px);
+      box-shadow: 
+        0 12px 0 #2b1a47,
+        0 20px 30px black;
+    }
+
+    /* ===== قسم النسخ الفاخر ===== */
+    .copy-ultimate {
+      display: flex;
+      align-items: center;
+      background: rgba(10, 5, 20, 0.8);
+      backdrop-filter: blur(20px);
+      border: 2px solid #ccaeff;
+      border-radius: 80px;
+      padding: 0.5rem;
+      margin: 2rem 0 2rem;
+      box-shadow: 0 20px 0 #271e3b, 0 0 40px #ad75ff;
+    }
+
+    .copy-preview {
+      font-family: monospace;
+      font-size: 1.8rem;
+      color: white;
+      text-shadow: 0 0 15px #d1b2ff;
+      padding: 0 1.5rem;
+      flex: 1;
+      word-break: break-word;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    .copy-ultimate-btn {
+      background: linear-gradient(145deg, #a07cff, #7245d4);
+      border: none;
+      border-radius: 70px;
+      padding: 1.5rem 3rem;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #0d0221;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+      box-shadow: 8px 8px 0 #301d55, 0 0 30px #c69eff;
+      border: 2px solid white;
+      transition: 0.1s;
+    }
+
+    .copy-ultimate-btn i {
+      font-size: 2.2rem;
+      color: white;
+    }
+
+    .copy-ultimate-btn:active {
+      transform: translate(8px, 8px);
+      box-shadow: 2px 2px 0 #2e1b4a;
+    }
+
+    /* ===== قائمة سفلية متطورة ===== */
+    .bottom-navigation {
+      display: flex;
+      justify-content: space-around;
+      background: rgba(17, 6, 34, 0.8);
+      backdrop-filter: blur(30px);
+      border-radius: 80px;
+      padding: 0.9rem 1.2rem;
+      margin-top: 2.8rem;
+      border: 2px solid #b790ff;
+      box-shadow: 0 15px 0 #2b1d45, 0 0 40px #9e77ff;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #f0e2ff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      gap: 6px;
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      transition: 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-item i {
+      font-size: 2.2rem;
+      filter: drop-shadow(0 0 12px #b286ff);
+    }
+
+    .nav-item:active {
+      background: #6144a0;
+      color: white;
+      transform: scale(0.95);
+    }
+
+    .nav-copy {
+      background: #ffffff20;
+      border: 1px dashed white;
+    }
+
+    /* ===== اقتباس متحرك ===== */
+    .manga-quote-advanced {
+      margin: 2rem 0 1rem;
+      text-align: center;
+      font-size: 1.3rem;
+      color: #f2e2ff;
+      padding: 1rem;
+      border-radius: 80px;
+      background: #1a0f2f60;
+      backdrop-filter: blur(5px);
+      border-left: 8px solid #ab7eff;
+      border-right: 8px solid #ab7eff;
+      animation: glowPulse 3s infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { text-shadow: 0 0 10px #d5b5ff; }
+      50% { text-shadow: 0 0 30px #ffec9e; }
+    }
+
+    /* ===== تحسينات الهواتف ===== */
+    @media (max-width: 550px) {
+      .moon-card { padding: 2rem 1.2rem; }
+      h1 { font-size: 3.8rem; letter-spacing: 4px; }
+      .server-ip { font-size: 1.6rem; }
+      .server-port { font-size: 1.5rem; padding: 0.3rem 1rem; }
+      .super-btn { font-size: 1.5rem; padding: 1.2rem; }
+      .copy-preview { font-size: 1.4rem; }
+      .copy-ultimate-btn { padding: 1.2rem 2rem; font-size: 1.5rem; }
+      .nav-item i { font-size: 1.8rem; }
+      .nav-item span { font-size: 1rem; }
+    }
+
+    @media (max-width: 380px) {
+      h1 { font-size: 3rem; }
+      .server-3d { flex-direction: column; text-align: center; }
+    }
+
+    /* ===== تأثيرات إضافية ===== */
+    .glow-text {
+      color: white;
+      text-shadow: 0 0 20px #c5a3ff, 0 0 40px #a06eff;
+    }
+  </style>
+</head>
+<body>
+  <div class="moon-card">
+    <!-- الزخرفة العلوية -->
+    <div class="manga-ornament"></div>
+
+    <!-- قسم العنوان -->
+    <div class="title-section">
+      <div class="japanese-title">🌙 月夜の伝説 🌙</div>
+      <h1>MOONNIGHT</h1>
+    </div>
+
+    <!-- عرض السيرفر بشكل ثلاثي الأبعاد -->
+    <div class="server-3d">
+      <i class="fas fa-crown server-icon"></i>
+      <span class="server-ip">moonnight.mineplay.pro</span>
+      <span class="server-port">25002</span>
+    </div>
+
+    <!-- أزرار القوة (ديسكورد + انستقرام) -->
+    <div class="button-group">
+      <a href="https://discord.com/invite/moonnight" class="super-btn" target="_blank">
+        <i class="fab fa-discord"></i> Discord
+      </a>
+      <a href="https://www.instagram.com/moonnight_mc?igsh=MWRjNGJvbWUzejl5Nw==" class="super-btn" target="_blank">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+    </div>
+
+    <!-- منطقة النسخ الفائقة -->
+    <div class="copy-ultimate">
+      <span class="copy-preview" id="serverFull">moonnight.mineplay.pro:25002</span>
+      <button class="copy-ultimate-btn" id="ultimateCopyBtn">
+        <i class="fas fa-copy"></i> <span id="copyBtnText">انسخ</span>
+      </button>
+    </div>
+
+    <!-- اقتباس أنمي قوي -->
+    <div class="manga-quote-advanced">
+      ⚡ 白と紫の力 · قوة الأبيض والبنفسجي ⚡
+    </div>
+
+    <!-- قائمة تنقل سفلية احترافية -->
+    <div class="bottom-navigation">
+      <a href="https://discord.com/invite/moonnight" class="nav-item" target="_blank">
+        <i class="fab fa-discord"></i>
+        <span>ديسكورد</span>
+      </a>
+      <a href="https://www.instagram.com/moonnight_mc?igsh=MWRjNGJvbWUzejl5Nw==" class="nav-item" target="_blank">
+        <i class="fab fa-instagram"></i>
+        <span>انستقرام</span>
+      </a>
+      <div class="nav-item nav-copy" id="bottomCopyBtn">
+        <i class="fas fa-copy"></i>
+        <span>نسخ IP</span>
+      </div>
+    </div>
+
+    <!-- حقل مساعد للنسخ -->
+    <textarea id="hiddenCopyField" style="position: absolute; left: -9999px; top: 0;" readonly>moonnight.mineplay.pro:25002</textarea>
+  </div>
+
+  <script>
+    (function() {
+      const fullIP = "moonnight.mineplay.pro:25002";
+      
+      // العناصر
+      const mainCopyBtn = document.getElementById('ultimateCopyBtn');
+      const bottomCopy = document.getElementById('bottomCopyBtn');
+      const copyBtnSpan = document.getElementById('copyBtnText');
+      const hiddenField = document.getElementById('hiddenCopyField');
+
+      // دالة النسخ المتقدمة
+      function copyToClipboard(sourceElement) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(fullIP).then(() => {
+            handleCopyFeedback(sourceElement);
+          }).catch(() => {
+            fallbackCopy();
+          });
+        } else {
+          fallbackCopy();
+        }
+      }
+
+      function fallbackCopy() {
+        hiddenField.value = fullIP;
+        hiddenField.select();
+        document.execCommand('copy');
+        handleCopyFeedback();
+      }
+
+      function handleCopyFeedback(trigger) {
+        // تغيير نص الزر الرئيسي
+        if (copyBtnSpan) {
+          const originalText = copyBtnSpan.innerText;
+          copyBtnSpan.innerText = 'تم ✅';
+          if (mainCopyBtn) {
+            mainCopyBtn.style.background = 'linear-gradient(145deg, #c49eff, #9b6eff)';
+            mainCopyBtn.style.boxShadow = '12px 12px 0 #4f318f';
+          }
+          setTimeout(() => {
+            copyBtnSpan.innerText = originalText;
+            if (mainCopyBtn) {
+              mainCopyBtn.style.background = 'linear-gradient(145deg, #a07cff, #7245d4)';
+              mainCopyBtn.style.boxShadow = '8px 8px 0 #301d55';
+            }
+          }, 1500);
+        }
+
+        // تغيير مؤقت لأيقونة النسخ السفلية
+        if (bottomCopy) {
+          const originalBottomHtml = bottomCopy.innerHTML;
+          bottomCopy.innerHTML = '<i class="fas fa-check"></i><span>تم</span>';
+          setTimeout(() => {
+            bottomCopy.innerHTML = '<i class="fas fa-copy"></i><span>نسخ IP</span>';
+          }, 1500);
+        }
+      }
+
+      // إضافة الأحداث
+      if (mainCopyBtn) {
+        mainCopyBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          copyToClipboard(mainCopyBtn);
+        });
+      }
+
+      if (bottomCopy) {
+        bottomCopy.addEventListener('click', (e) => {
+          e.preventDefault();
+          copyToClipboard(bottomCopy);
+        });
+      }
+
+      // النقر على النص ينسخ أيضاً
+      const previewSpan = document.getElementById('serverFull');
+      if (previewSpan) {
+        previewSpan.addEventListener('click', () => {
+          copyToClipboard(previewSpan);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
